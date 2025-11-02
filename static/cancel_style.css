@@ -1,0 +1,117 @@
+/* General page styling */
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  background: #f5f6fa;
+  margin: 0;
+  padding: 30px;
+  color: #2f3640;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  color: #2f3640;
+  margin-bottom: 30px;
+}
+
+/* Flash messages */
+.message {
+  width: 60%;
+  margin: 15px auto;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.message.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.message.danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Form card */
+form {
+  max-width: 500px;
+  margin: auto;
+  background: #ffe6e6; /* light pastel pink */
+  padding: 35px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+}
+
+form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  background: #ffd6d6; /* slightly deeper pastel on hover */
+}
+
+/* Inputs & Selects */
+input[type="text"], input[type="password"], select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 18px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 10px;
+  font-size: 16px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #e60000;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+th {
+  background-color: #ffd6d6;
+}
+
+/* Links */
+a {
+  display: block;
+  text-align: center;
+  margin-top: 25px;
+  color: #ff4d4d;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}

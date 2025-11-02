@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='book_style.css') }}">
+  <meta charset="utf-8">
+  <title>Book Classroom</title>
+  <style>
+    body { font-family: Arial; background: #f5f6fa; padding: 30px; }
+    h1 { text-align: center; color: #2f3640; }
+    form { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 400px; margin: auto; }
+    input, select, button { width: 100%; padding: 8px; margin: 5px 0 15px 0; }
+    button { background: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .message { width: 400px; margin: auto; padding: 10px; border-radius: 5px; text-align: center; }
+    .success { background-color: #d4edda; color: #155724; }
+    .warning { background-color: #fff3cd; color: #856404; }
+    .danger { background-color: #f8d7da; color: #721c24; }
+    a { display: block; text-align: center; margin-top: 20px; color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Book a Classroom</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="message {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="post">
+    Teacher Name:
+    <input name="teacher" required placeholder="Enter your name">
+
+    Room:
+    <select name="room">
+      {% for r in rooms %}
+        <option value="{{ r.room_name }}" {% if r.room_name == room_prefill %}selected{% endif %}>
+          {{ r.room_name }}
+        </option>
+      {% endfor %}
+    </select>
+
+    Day:
+    <input name="day" required placeholder="Monday" value="{{ day_prefill }}">
+
+    Start Time (HH:MM):
+    <input name="start" required placeholder="09:00" value="{{ start_prefill }}">
+
+    End Time (HH:MM):
+    <input name="end" required placeholder="10:00" value="{{ end_prefill }}">
+
+    Secret Code:
+    <input name="code" required placeholder="Enter secret code">
+
+    <button type="submit">Book Classroom</button>
+  </form>
+
+  <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

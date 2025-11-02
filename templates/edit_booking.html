@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='edit_style.css') }}">
+  <meta charset="utf-8">
+  <title>Edit Booking</title>
+  <style>
+    body { font-family: Arial; background: #f5f6fa; padding: 30px; }
+    h1 { text-align: center; color: #2f3640; }
+    form { width: 60%; margin: auto; background: white; padding: 20px; border-radius: 10px; 
+           box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    input[type="text"], input[type="password"], input[type="time"], select {
+      width: 90%; padding: 8px; margin: 5px 0;
+      border: 1px solid #ccc; border-radius: 5px;
+    }
+    button {
+      padding: 8px 15px; margin-top: 10px;
+      background-color: #007bff; color: white;
+      border: none; cursor: pointer; border-radius: 5px;
+    }
+    button:hover { background-color: #0056b3; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #dcdde1; }
+    .section { width: 70%; margin: auto; background: white; padding: 20px; border-radius: 10px; 
+               box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>✏️ Edit Your Booking</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div style="color:
+            {% if category=='success' %}green
+            {% elif category=='warning' %}orange
+            {% else %}red{% endif %};
+            text-align:center;">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% if bookings is not defined or bookings == None %}
+    <!-- Step 1: Enter teacher name & code -->
+    <form method="post">
+      <label>Teacher Name:</label><br>
+      <input type="text" name="teacher" required><br><br>
+
+      <label>Secret Code:</label><br>
+      <input type="password" name="code" required><br><br>
+
+      <button type="submit">Show My Bookings</button>
+    </form>
+
+  {% else %}
+    <!-- Step 2: Show current bookings -->
+    <div class="section">
+      <h2 style="text-align:center;">Your Current Bookings</h2>
+      <form method="post">
+        <input type="hidden" name="teacher" value="{{ bookings[0].teacher_name }}">
+        <input type="hidden" name="code" value="{{ request.form.code }}">
+
+        <table>
+          <tr>
+            <th>Select</th>
+            <th>Room</th>
+            <th>Day</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+          </tr>
+          {% for b in bookings %}
+            <tr>
+              <td><input type="radio" name="booking_id" value="{{ b.id }}" required></td>
+              <td>{{ b.classroom.room_name }}</td>
+              <td>{{ b.day }}</td>
+              <td>{{ b.start_time }}</td>
+              <td>{{ b.end_time }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+
+        <h3 style="text-align:center; margin-top:20px;">Enter New Details</h3>
+        <label>New Day:</label><br>
+        <input type="text" name="new_day" required placeholder="e.g. Monday"><br><br>
+
+        <label>New Start Time:</label><br>
+        <input type="time" name="new_start" required><br><br>
+
+        <label>New End Time:</label><br>
+        <input type="time" name="new_end" required><br><br>
+
+        <div style="text-align:center;">
+          <button type="submit">Update Booking</button>
+        </div>
+      </form>
+    </div>
+  {% endif %}
+
+  <br>
+  <div style="text-align:center;">
+    <a href="{{ url_for('home') }}">⬅ Back to Home</a>
+  </div>
+</body>
+</html>

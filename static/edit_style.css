@@ -1,0 +1,140 @@
+/* Overall Page */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f3f7fa;
+  margin: 0;
+  padding: 30px;
+  color: #2f3640;
+}
+
+h1 {
+  text-align: center;
+  color: #2f3640;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Flash messages */
+.flash {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 0.5s ease-in;
+}
+.flash.success { background: #d4edda; color: #155724; }
+.flash.warning { background: #fff3cd; color: #856404; }
+.flash.error { background: #f8d7da; color: #721c24; }
+
+/* Card for forms and sections */
+form, .section {
+  width: 60%;
+  margin: auto;
+  background: #e0f7fa; /* soft pastel color */
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+form:hover, .section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Labels and inputs */
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 500;
+}
+input[type="text"], input[type="time"], input[type="password"], select {
+  width: 95%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+input[type="text"]:focus, input[type="time"]:focus, input[type="password"]:focus, select:focus {
+  border-color: #4db6ac;
+  box-shadow: 0 0 5px rgba(77,182,172,0.5);
+  outline: none;
+}
+
+/* Buttons */
+button {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #4db6ac;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+button:hover {
+  background-color: #00897b;
+  transform: scale(1.03);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+th, td {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  text-align: center;
+}
+th {
+  background-color: #b2dfdb;
+  font-weight: 600;
+}
+tr:hover {
+  background-color: #e0f2f1;
+  transition: 0.2s;
+}
+
+/* Step 2 section header */
+h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* No data */
+.no-data {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* Back link */
+a {
+  text-decoration: none;
+  color: #00897b;
+  font-weight: 500;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}

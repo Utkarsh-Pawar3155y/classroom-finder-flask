@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Check Classroom Availability</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='check_style.css') }}">
+</head>
+<body>
+  <h1>🏫 Check Classroom Availability</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <!-- Check availability form -->
+  <div class="card fade-in">
+    <form method="post">
+      <label>Day:</label>
+      <input type="text" name="day" required placeholder="e.g. Monday">
+
+      <label>Start Time (HH:MM):</label>
+      <input type="time" name="start" required>
+
+      <label>End Time (HH:MM):</label>
+      <input type="time" name="end" required>
+
+      <button type="submit" class="btn">Check Availability</button>
+    </form>
+  </div>
+
+  {% if available_rooms is defined %}
+  <div class="card results fade-in">
+    <h2>Available Classrooms on <u>{{ day }}</u> from <u>{{ start }}</u> to <u>{{ end }}</u>:</h2>
+
+    {% if available_rooms %}
+    <table>
+      <tr>
+        <th>Room Name</th>
+        <th>Room Type</th>
+        <th>Action</th>
+      </tr>
+      {% for room in available_rooms %}
+      <tr>
+        <td>{{ room.room_name }}</td>
+        <td>{{ room.room_type }}</td>
+        <td>
+          <form method="get" action="{{ url_for('book') }}">
+            <input type="hidden" name="room" value="{{ room.room_name }}">
+            <input type="hidden" name="day" value="{{ day }}">
+            <input type="hidden" name="start" value="{{ start }}">
+            <input type="hidden" name="end" value="{{ end }}">
+            <button type="submit" class="btn-secondary">Book Now</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+      <p class="no-data">No classrooms available during this time slot.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="back-link">
+    <a href="{{ url_for('home') }}">⬅ Back to Home</a>
+  </div>
+</body>
+</html>

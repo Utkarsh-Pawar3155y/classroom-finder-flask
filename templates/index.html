@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Classroom Timetable</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    // Show live Delhi time in header
+    function updateTime() {
+      const now = new Date();
+      const options = { timeZone: "Asia/Kolkata", hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      document.getElementById("clock").textContent = now.toLocaleTimeString('en-IN', options);
+    }
+    setInterval(updateTime, 1000);
+    window.onload = updateTime;
+
+    // 🌗 Theme Toggle
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      const toggle = document.getElementById('theme-toggle');
+      toggle.classList.toggle('active');
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header">
+    <h1>📘 Vacant Classroom Finder</h1>
+    <p id="clock" class="clock"></p>
+
+    <!-- 🌗 Theme Slide Switch -->
+    <div class="theme-container">
+    </div>
+  </header>
+
+  <nav class="top-links">
+    <a href="{{ url_for('book') }}">➕ Book</a>
+    <a href="{{ url_for('cancel') }}">❌ Cancel</a>
+    <a href="{{ url_for('check_availability') }}">🔍 Check</a>
+    <a href="{{ url_for('edit_booking') }}">✏️ Edit</a>
+  </nav>
+
+  <section class="filter-section">
+    <form method="POST" action="{{ url_for('home') }}" class="filter-form">
+      <label for="room_filter">Select Classroom: </label>
+      <select name="room_filter" id="room_filter" onchange="this.form.submit()">
+        {% for room in rooms %}
+          <option value="{{ room.room_name }}" {% if selected_room_name == room.room_name %}selected{% endif %}>
+            {{ room.room_name }}
+          </option>
+        {% endfor %}
+      </select>
+      <noscript><button type="submit">Show</button></noscript>
+    </form>
+  </section>
+
+  {% set days_order = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] %}
+
+  {% for room in rooms_data %}
+    <div class="classroom">
+      <h2>{{ room.room_name }} <span class="room-type">({{ room.room_type }})</span></h2>
+
+      {% for day in days_order %}
+        <div class="day-block">
+          <h3>{{ day }}</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Teacher</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if room.schedule[day] is defined %}
+                {% for start, end, teacher in room.schedule[day] %}
+                  <tr class="booked">
+                    <td>{{ start }}</td>
+                    <td>{{ end }}</td>
+                    <td>{{ teacher }}</td>
+                    <td>Booked</td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr class="free">
+                  <td colspan="4">✅ No bookings — classroom is free all day.</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+  <footer>
+    <p>© 2025 Classroom Finder — Built with Flask 💙</p>
+  </footer>
+</body>
+</html>

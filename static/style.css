@@ -1,0 +1,247 @@
+/* General page styling */
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  background: #f5f6fa;
+  margin: 0;
+  padding: 0;
+  color: #2f3640;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  background: #4070f4;
+  color: white;
+  padding: 25px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.clock {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Navigation links: modern style - light mode only */
+.top-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background: #fff;
+  padding: 12px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  margin: 15px auto;
+  width: fit-content;
+  transition: background 0.3s;
+}
+
+.top-links a {
+  position: relative;
+  padding: 8px 15px;
+  color: #4070f4;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.top-links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #4070f4;
+  bottom: 4px;
+  left: 0;
+  transition: 0.3s;
+}
+
+.top-links a:hover::after {
+  width: 100%;
+}
+
+.top-links a:hover {
+  background: rgba(64, 112, 244, 0.1);
+  color: #1b4dd8;
+}
+
+
+/* Filter section */
+.filter-section {
+  text-align: center;
+  margin: 25px 0;
+}
+
+select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+  background: #4070f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #3058d3;
+}
+
+/* Classroom card */
+.classroom {
+  background: #e8f5e9;  /* subtle light color */
+  margin: 25px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 85%;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.classroom:hover {
+  transform: scale(1.01);
+  background: #f0f4ff;  /* slightly brighter on hover */
+}
+
+
+.room-type {
+  color: #888;
+  font-weight: normal;
+}
+
+/* Day and Table styling */
+.day-block h3 {
+  background: #e3e6ff;
+  color: #1b4dd8;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
+
+th {
+  background-color: #dcdde1;
+}
+
+.free {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.booked {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #f0f1f6;
+  margin-top: 30px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* Small enhancement for live clock + footer hover */
+.clock {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+footer p:hover {
+  opacity: 1;
+}
+/* 🌙 Theme Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  background: #fff;
+  color: #4070f4;
+  font-weight: 600;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.theme-toggle:hover {
+  background: #4070f4;
+  color: #fff;
+}
+
+/* 🌗 Dark Mode Styles */
+body.dark-mode {
+  background: #1e1e2f;
+  color: #f5f5f5;
+}
+
+body.dark-mode .header {
+  background: #292946;
+  color: #fff;
+}
+
+body.dark-mode .top-links {
+  background: #2f2f4f;
+}
+
+body.dark-mode .top-links a {
+  color: #9cb4ff;
+}
+
+body.dark-mode .classroom {
+  background: #2a2a3d;
+  color: #f0f0f0;
+  box-shadow: 0 2px 10px rgba(255,255,255,0.05);
+}
+
+body.dark-mode th {
+  background-color: #38385a;
+}
+
+body.dark-mode td {
+  border-color: #444;
+}
+
+body.dark-mode footer {
+  background: #292946;
+  color: #ccc;
+}
+
+/* ✨ Animation for classroom cards */
+.classroom {
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
